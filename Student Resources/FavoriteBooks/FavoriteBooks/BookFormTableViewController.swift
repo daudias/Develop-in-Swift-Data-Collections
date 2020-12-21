@@ -1,7 +1,20 @@
+//
+//  BookFormTableViewController.swift
+//  FavoriteBooks
+//
+//  Created by Dias on 12/21/20.
+//
+
 import UIKit
 
-class BookFormViewController: UIViewController {
-
+class BookFormTableViewController: UITableViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        updateView()
+    }
+    
     var book: Book?
     
     @IBOutlet var titleTextField: UITextField!
@@ -19,12 +32,6 @@ class BookFormViewController: UIViewController {
         super.init(coder: coder)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        updateView()
-    }
-    
     func updateView() {
         guard let book = book else {return}
         
@@ -38,10 +45,9 @@ class BookFormViewController: UIViewController {
         guard let title = titleTextField.text,
             let author = authorTextField.text,
             let genre = genreTextField.text,
-            let length = lengthTextField.text else {return}
+            let length = lengthTextField.text else { return }
         
         book = Book(title: title, author: author, genre: genre, length: length)
         performSegue(withIdentifier: "UnwindToBookTable", sender: self)
     }
-
 }

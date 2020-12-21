@@ -34,27 +34,27 @@ class BookTableViewController: UITableViewController {
     // MARK: - Navigation
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
-        guard let source = segue.source as? BookFormViewController,
-            let book = source.book else {return}
-        
+        guard let source = segue.source as? BookFormTableViewController,
+            let book = source.book else { return }
+        print("in")
         if let indexPath = tableView.indexPathForSelectedRow {
             books.remove(at: indexPath.row)
             books.insert(book, at: indexPath.row)
-            tableView.deselectRow(at: indexPath, animated: true)
+            //tableView.deselectRow(at: indexPath, animated: true)
+            print("ok")
         } else {
             books.append(book)
         }
     }
     
-    @IBSegueAction func editBook(_ coder: NSCoder, sender: Any?) -> BookFormViewController? {
+    @IBSegueAction func editBook(_ coder: NSCoder, sender: Any?) -> BookFormTableViewController? {
         
         guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else {
             return nil
         }
-        
         let book = books[indexPath.row]
         
-        return BookFormViewController(coder: coder, book: book)
+        return BookFormTableViewController(coder: coder, book: book)
     }
     
     
